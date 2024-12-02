@@ -1,27 +1,27 @@
 const menu = [
   {
     name: "Margherita",
-    image: "imgs/pizze/margherita.webp",
+    image: "img/pizze/margherita.webp",
     ingredients: ["pomodoro", "mozzarella"],
   },
   {
     name: "Marinara",
-    image: "imgs/pizze/marinara.jpeg",
+    image: "img/pizze/marinara.jpeg",
     ingredients: ["pomodoro", "aglio", "origano"],
   },
   {
     name: "Diavola",
-    image: "imgs/pizze/diavola.jpeg",
+    image: "img/pizze/diavola.jpeg",
     ingredients: ["pomodoro", "mozzarella", "salame piccante"],
   },
   {
     name: "Bufalina",
-    image: "imgs/pizze/bufalina.jpeg",
+    image: "img/pizze/bufalina.jpeg",
     ingredients: ["pomodoro", "mozzarella di bufala"],
   },
   {
     name: "4 formaggi",
-    image: "imgs/pizze/4_formaggi.jpeg",
+    image: "img/pizze/4_formaggi.jpeg",
     ingredients: [
       "pomodoro",
       "mozzarella",
@@ -31,3 +31,5 @@ const menu = [
     ],
   },
 ];
+
+module.exports = menu;
