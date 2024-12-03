@@ -1,0 +1,149 @@
+/*RESET*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Edu TAS Beginner", sans-serif;
+
+}
+
+header {
+    text-align: center;
+    font-size: 30px;
+    background-image: url(../img/wall.png);
+    padding: 20px;
+    text-transform: uppercase;
+}
+
+main {
+    background-image: url(../img/cork.png);
+    padding: 100px;
+    min-height: calc(100vh - 100px);
+}
+
+#overlay {
+    background-color: rgba(0, 0, 0, 0.50);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    z-index: 100;
+}
+
+.btn {
+    padding: 6px 12px;
+    background-color: white;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#loader {
+    background-color: rgba(0, 0, 0, 0.50);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    font-size: 100px;
+    color: white;
+}
+
+.d-none {
+    display: none !important;
+}
+
+#gallery {
+    margin: 0 auto;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+
+}
+
+figure {
+    background-color: white;
+    padding: 15px;
+    width: 100%;
+    box-shadow: 2px 3px 1.5px rgba(0, 0, 0, 0.25);
+    position: relative;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+figcaption {
+    color: rgb(136, 136, 136);
+    font-weight: 700;
+    font-size: 1.5em;
+    text-transform: capitalize;
+}
+
+img.pin {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    translate: -50%;
+}
+
+figure img:nth-child(2) {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+figure:hover {
+    scale: 1.1;
+    rotate: 10deg;
+    z-index: 1;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+figure:hover .pin {
+    display: none;
+}
+
+/*Media Query*/
+@media screen and (min-width: 768px) {
+    figure {
+        width: calc((100% - 60px) / 2);
+    }
+
+    figcaption {
+        font-size: 1.2em;
+
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    header {
+        font-size: 40px;
+        padding: 30px;
+    }
+
+    figure {
+        width: calc((100% - 60px) / 3);
+    }
+
+    figcaption {
+        font-size: 1em;
+
+    }
+}

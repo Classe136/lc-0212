@@ -3,35 +3,42 @@ const app = express();
 const PORT = 3000;
 
 //definisco dove sono gli asset statici
-app.use(express.static("public")); //http://localhost:3000/
+app.use(express.static("public")); //http://localhost:3000/....
 
-const menu = require("./data/menu.js");
+const menu = require("./data/menu.js"); //i vostri posts
 
 //rotte
 app.get("/", (req, res) => {
-  res.send("<h1>Api delle pizze</h1>");
+  //res.send("<h1>Api delle pizze</h1>");
+  res.sendFile("index.html", { root: __dirname + "/pages" });
 });
 
 app.get("/pizzas", (req, res) => {
+  //La vostra bacheca
   //console.log("request:", req);
   //console.log("response: ", res);
   // http://localhost:3000/pizzas?name=margherita&ingredients=sale
   //console.log(req.query);
   const pizzaName = req.query.name;
-  console.log(pizzaName);
-  let pizze = [...menu];
+  //console.log(pizzaName);
+  //let pizze = [...menu];
+  let response = {
+    totalCount: menu.length,
+    data: [...menu], // copia dell'array nel caso dovessimo filtrare i dati
+  };
 
-  if (pizzaName) {
-    pizze = menu.find((pizza) => {
-      return pizza.name.toLowerCase() === pizzaName.toLowerCase();
-    });
-    if (!pizze) {
-      pizze = {
-        error: "Pizza non trovata",
-      };
-    }
-  }
-  res.json(pizze);
+  // if (pizzaName) {
+  //   response.data = menu.filter(pizza => pizza.name.toLowerCase() === pizzaName.toLowerCase());
+  //
+  //   if (response.data.length < 1) {
+  //    res.status(404);
+  //    response  = {
+  //       error: 404,
+  //       message: "Non ci sono pizze per la tua ricerca"
+  //     };
+  //   }
+  // }
+  res.json(response);
 });
 
 //rotta fallback
