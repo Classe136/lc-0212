@@ -2,10 +2,11 @@ const express = require("express");
 const app = express();
 const PORT = 3000;
 
-//definisco dove sono gli asset statici
-app.use(express.static("public")); //http://localhost:3000/....
+const pizzasRouter = require("./routers/pizzas");
+const petsRouter = require("./routers/pets");
 
-const menu = require("./data/menu.js"); //i vostri posts
+//definisco dove sono gli asset statici
+app.use(express.static("public")); //http://localhost:3000/toys....
 
 //rotte web
 
@@ -21,52 +22,10 @@ app.get("/", (req, res) => {
 // }
 
 // rotte api
+app.use("/pizzas", pizzasRouter);
+app.use("/pets", petsRouter);
 
-// leggo tutte le pizze
-app.get("/pizzas", (req, res) => {
-  const pizzaName = req.query.name;
-  console.log(pizzaName);
-  let response = {
-    totalCount: menu.length,
-    data: [...menu],
-    // copia dell'array nel caso dovessimo filtrare i dati
-  };
-
-  if (pizzaName) {
-    response.data = menu.filter((pizza) =>
-      pizza.name.toLowerCase().includes(pizzaName.toLowerCase())
-    );
-
-    if (response.data.length < 1) {
-      res.status(404);
-      response = {
-        error: 404,
-        message: "Non ci sono pizze per la tua ricerca",
-      };
-    }
-  }
-  res.json(response);
-});
-
-// leggere una sola pizza
-app.get("/pizzas/:id", (req, res) => {
-  //pizzas/1/
-  console.log(req.params);
-  const id = parseInt(req.params.id);
-  const item = menu.find((pizza) => pizza.id === id);
-  if (item) {
-    res.json({
-      success: true,
-      item,
-    });
-  } else {
-    res.status(404);
-    res.json({
-      success: false,
-      message: "La pizza non esiste",
-    });
-  }
-});
+// leggo tutte le pizze - Read all - Index
 
 //rotta fallback
 app.all("*", (req, res) => {
@@ -76,3 +35,28 @@ app.all("*", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}}`);
 });
+/*
+Usando l'array dei post fornito con le relative immagini, creare un file di routing (`routers/posts.js`) che conterrà le rotte necessario per l'entità `post`.
+
+All'interno creare le rotte per le operazioni CRUD (*Index, Show, Create, Update e Delete)*
+
+Tutte le risposte saranno dei testi che confermeranno l’operazione che il server deve eseguire, secondo le convenzioni REST.
+
+Ad esempio: 
+
+Se viene chiamata `/posts` col verbo `GET` ci aspettiamo “Lista dei post”;
+
+Se viene chiamato `/posts/1` col verbo `DELETE` ci aspettiamo “Cancellazione del post 1”
+
+e via dicendo…  
+
+Registrare il router dentro `app.js` con il prefisso `posts/`.
+
+### Bonus
+
+- Provare a restituire la lista dei post dalla rotta *index*, in formato `json`
+- Provare a restituire un singolo post dalla rotta *show,* sempre in formato `json`
+
+
+
+*/
