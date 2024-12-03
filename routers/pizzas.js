@@ -17,13 +17,13 @@ router.get("/", (req, res) => {
       item.name.toLowerCase().includes(itemName.toLowerCase())
     );
 
-    if (response.data.length < 1) {
-      res.status(404);
-      response = {
-        error: 404,
-        message: "Non ci sono pizze per la tua ricerca",
-      };
-    }
+    // if (response.data.length < 1) {
+    //   res.status(404);
+    //   response = {
+    //     error: 404,
+    //     message: "Non ci sono pizze per la tua ricerca",
+    //   };
+    // }
   }
   res.json(response);
 });
