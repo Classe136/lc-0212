@@ -7,38 +7,65 @@ app.use(express.static("public")); //http://localhost:3000/....
 
 const menu = require("./data/menu.js"); //i vostri posts
 
-//rotte
+//rotte web
+
 app.get("/", (req, res) => {
-  //res.send("<h1>Api delle pizze</h1>");
   res.sendFile("index.html", { root: __dirname + "/pages" });
 });
 
+// app.get("/", getData);
+
+//callback:
+// function getData(req, res){
+//   res.sendFile("index.html", { root: __dirname + "/pages" });
+// }
+
+// rotte api
+
+// leggo tutte le pizze
 app.get("/pizzas", (req, res) => {
-  //La vostra bacheca
-  //console.log("request:", req);
-  //console.log("response: ", res);
-  // http://localhost:3000/pizzas?name=margherita&ingredients=sale
-  //console.log(req.query);
   const pizzaName = req.query.name;
-  //console.log(pizzaName);
-  //let pizze = [...menu];
+  console.log(pizzaName);
   let response = {
     totalCount: menu.length,
-    data: [...menu], // copia dell'array nel caso dovessimo filtrare i dati
+    data: [...menu],
+    // copia dell'array nel caso dovessimo filtrare i dati
   };
 
-  // if (pizzaName) {
-  //   response.data = menu.filter(pizza => pizza.name.toLowerCase() === pizzaName.toLowerCase());
-  //
-  //   if (response.data.length < 1) {
-  //    res.status(404);
-  //    response  = {
-  //       error: 404,
-  //       message: "Non ci sono pizze per la tua ricerca"
-  //     };
-  //   }
-  // }
+  if (pizzaName) {
+    response.data = menu.filter((pizza) =>
+      pizza.name.toLowerCase().includes(pizzaName.toLowerCase())
+    );
+
+    if (response.data.length < 1) {
+      res.status(404);
+      response = {
+        error: 404,
+        message: "Non ci sono pizze per la tua ricerca",
+      };
+    }
+  }
   res.json(response);
+});
+
+// leggere una sola pizza
+app.get("/pizzas/:id", (req, res) => {
+  //pizzas/1/
+  console.log(req.params);
+  const id = parseInt(req.params.id);
+  const item = menu.find((pizza) => pizza.id === id);
+  if (item) {
+    res.json({
+      success: true,
+      item,
+    });
+  } else {
+    res.status(404);
+    res.json({
+      success: false,
+      message: "La pizza non esiste",
+    });
+  }
 });
 
 //rotta fallback
@@ -49,14 +76,3 @@ app.all("*", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}}`);
 });
-
-/*
-Creiamo il nostro blog personale e giorno dopo giorno lo potremo arricchire con nuove funzionalità sulla base di quello che impareremo. 
-
-- Creiamo il progetto base con una rotta `/` che ritorna un testo semplice con scritto ”Server del mio blog”
-- Creiamo un array dove inserire una lista di almeno 5 post, per ognuno indicare titolo, contenuto, immagine e tags (tags è un array di stringhe)
-- Creiamo poi una rotta `/bacheca` che restituisca un oggetto json con la lista dei post e il conteggio, partendo da un array.
-- Configuriamo gli asset statici sull’applicazione in modo che si possano visualizzare le immagini associate ad ogni post.
-- Testare su postman
-
-*/
