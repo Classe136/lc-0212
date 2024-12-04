@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const pets = require("../data/pets.js"); //i vostri posts
+const pets = require("../models/pets.js"); //i vostri posts
 // index
 router.get("/", (req, res) => {
   const itemName = req.query.name;
