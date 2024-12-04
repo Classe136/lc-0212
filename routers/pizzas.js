@@ -55,17 +55,17 @@ router.post("/", (req, res) => {
 
 //Update totale - Update
 router.put("/:id", (req, res) => {
-  res.send("Modifica integrale della pizza");
+  res.send("Modifica integrale della pizza con id: " + req.params.id);
 });
 
 //Update parziale - Modify
 router.patch("/:id", (req, res) => {
-  res.send("Modifica parziale della pizza");
+  res.send("Modifica parziale della pizza con id: " + req.params.id);
 });
 
 //Delete (cancellazione) - Destroy
 router.delete("/:id", (req, res) => {
-  res.send("Cancellazione della pizza");
+  res.send("Cancellazione della pizza con id: " + req.params.id);
 });
 
 module.exports = router;
