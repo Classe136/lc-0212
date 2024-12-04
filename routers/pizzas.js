@@ -5,33 +5,36 @@ const menu = require("../data/menu.js"); //i vostri posts
 // index
 router.get("/", (req, res) => {
   const itemName = req.query.name;
-  console.log(itemName);
-  let response = {
-    totalCount: menu.length,
-    data: [...menu],
-    // copia dell'array nel caso dovessimo filtrare i dati
-  };
+  const itemIngredient = req.query.ingredient;
+  //console.log(itemName);
+  // const response = {
+  //   totalCount: menu.length,
+  //   data: [...menu],
+  //   // copia dell'array nel caso dovessimo filtrare i dati
+  // };
 
+  let menuCopy = [...menu];
   if (itemName) {
-    response.data = menu.filter((item) =>
+    menuCopy = menu.filter((item) =>
       item.name.toLowerCase().includes(itemName.toLowerCase())
     );
-
-    // if (response.data.length < 1) {
-    //   res.status(404);
-    //   response = {
-    //     error: 404,
-    //     message: "Non ci sono pizze per la tua ricerca",
-    //   };
-    // }
   }
+  if (itemIngredient) {
+    menuCopy = menuCopy.filter((item) =>
+      item.ingredients.includes(itemIngredient)
+    );
+  }
+  const response = {
+    totalCount: menu.length,
+    data: menuCopy,
+  };
   res.json(response);
 });
 
 // leggere una sola pizza - Read one - Show
 router.get("/:id", (req, res) => {
   //pizzas/1/
-  console.log(req.params);
+  //console.log(req.params);
   const id = parseInt(req.params.id);
   const item = menu.find((item) => item.id === id);
   if (item) {
@@ -65,7 +68,19 @@ router.patch("/:id", (req, res) => {
 
 //Delete (cancellazione) - Destroy
 router.delete("/:id", (req, res) => {
-  res.send("Cancellazione della pizza con id: " + req.params.id);
+  //res.send("Cancellazione della pizza con id: " + req.params.id);
+  const id = parseInt(req.params.id);
+  const index = menu.findIndex((item) => item.id === id);
+  if (index !== -1) {
+    menu.splice(index, 1);
+    res.sendStatus(204);
+  } else {
+    res.status(404);
+    res.json({
+      error: "404",
+      message: "Pizza non trovata",
+    });
+  }
 });
 
 module.exports = router;

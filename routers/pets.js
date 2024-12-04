@@ -5,7 +5,7 @@ const pets = require("../data/pets.js"); //i vostri posts
 // index
 router.get("/", (req, res) => {
   const itemName = req.query.name;
-  console.log(itemName);
+  //console.log(itemName);
   let response = {
     totalCount: pets.length,
     data: [...pets],
