@@ -1,4 +1,4 @@
-const food = [
+const foods = [
   {
     id: 1,
     name: "Lifelong",
@@ -24,3 +24,5 @@ const food = [
     thumb: "img/food/ultima.jpg",
   },
 ];
+
+module.exports = foods;

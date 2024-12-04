@@ -1,13 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
+//const controller = require('../controllers/pizzaController');
+//per usare controller.index ecc
 const {
   index,
   show,
   store,
   update,
   destroy,
-} = require("../controllers/petController");
+} = require("../controllers/toyController");
 // index
 router.get("/", index);
 

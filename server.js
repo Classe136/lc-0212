@@ -4,6 +4,8 @@ const app = express();
 const pizzasRouter = require("./routers/pizzas");
 
 const petsRouter = require("./routers/pets");
+const toysRouter = require("./routers/toys");
+const foodsRouter = require("./routers/foods");
 
 //definisco dove sono gli asset statici
 app.use(express.static("public")); //http://localhost:3000/
@@ -23,6 +25,8 @@ app.get("/", homeController.index);
 // rotte api
 app.use("/pizzas", pizzasRouter);
 app.use("/pets", petsRouter);
+app.use("/toys", toysRouter);
+app.use("/foods", foodsRouter);
 
 // leggo tutte le pizze - Read all - Index
 

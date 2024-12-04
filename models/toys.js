@@ -32,3 +32,5 @@ const toys = [
     thumb: "img/toys/uccello.jpg",
   },
 ];
+
+module.exports = toys;
