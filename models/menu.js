@@ -10,6 +10,7 @@ const menu = [
     name: "Marinara",
     image: "img/pizze/marinara.jpeg",
     ingredients: ["pomodoro", "aglio", "origano"],
+    category: "pizze",
   },
   {
     id: 3,

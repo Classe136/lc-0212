@@ -9,7 +9,7 @@ const {
   store,
   update,
   destroy,
-} = require("../controllers/pizzaController");
+} = require("../controllers/commentController");
 
 //Rotte
 
