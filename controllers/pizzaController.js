@@ -45,7 +45,7 @@ function show(req, res) {
     res.json({ success: false, message: "La pizza non esiste" });
     return;
   }
-  itemWithComments = { ...item, comments: itemComments };
+  const itemWithComments = { ...item, comments: itemComments };
   res.json({ success: true, itemWithComments });
 }
 
