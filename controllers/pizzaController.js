@@ -1,6 +1,6 @@
 const menu = require("../models/menu.js"); //i vostri posts
 const comments = require("../models/comments.js"); //i vostri posts
-
+const CustomError = require("../classes/CustomError");
 /**
  * GET /pizzas
  * @summary Get all pizzas with optional filtering by name and ingredient
@@ -9,7 +9,7 @@ const comments = require("../models/comments.js"); //i vostri posts
  * @returns {object} - response object with total count and array of filtered or all pizzas
  */
 function index(req, res) {
-  //pippo.get();
+  pippo.get();
   const itemName = req.query.name;
   const itemIngredient = req.query.ingredient;
   //console.log(itemName);
@@ -50,10 +50,10 @@ function show(req, res) {
   }
   res.json(response);*/
   if (!item) {
-    //throw new Error("404 - La pizza non esiste");
-    res.status(404);
-    res.json({ success: false, message: "La pizza non esiste" });
-    return;
+    throw new CustomError("La pizza non esiste", 404);
+    // res.status(404);
+    // res.json({ success: false, message: "La pizza non esiste" });
+    // return;
   }
   const itemWithComments = { ...item, comments: itemComments };
   res.json({ success: true, itemWithComments });
