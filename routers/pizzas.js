@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const checkTime = require("../middlewares/checkTime");
 //const controller = require('../controllers/pizzaController');
 //per usare controller.index ecc
 const {
@@ -11,12 +11,14 @@ const {
   destroy,
 } = require("../controllers/pizzaController");
 
+//router.use(checkTime);
 //Rotte
 
 // index
 router.get("/", index);
 
 // leggere una sola pizza - Read one - Show
+//router.get("/:id", checkTime, show);
 router.get("/:id", show);
 
 //Create - Store

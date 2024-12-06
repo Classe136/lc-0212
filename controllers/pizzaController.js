@@ -1,7 +1,15 @@
 const menu = require("../models/menu.js"); //i vostri posts
 const comments = require("../models/comments.js"); //i vostri posts
 
+/**
+ * GET /pizzas
+ * @summary Get all pizzas with optional filtering by name and ingredient
+ * @param {string} [name] - name of the pizza
+ * @param {string} [ingredient] - ingredient of the pizza
+ * @returns {object} - response object with total count and array of filtered or all pizzas
+ */
 function index(req, res) {
+  //pippo.get();
   const itemName = req.query.name;
   const itemIngredient = req.query.ingredient;
   //console.log(itemName);
@@ -42,6 +50,8 @@ function show(req, res) {
   }
   res.json(response);*/
   if (!item) {
+    //throw new Error("404 - La pizza non esiste");
+    res.status(404);
     res.json({ success: false, message: "La pizza non esiste" });
     return;
   }
