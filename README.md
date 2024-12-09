@@ -1,6 +1,6 @@
 # lc-0212 - Node Express
 
-## Step 1
+## Step 1 - Scaffolding
 ```bash
 # create file server.js
 ni server.js
@@ -67,10 +67,9 @@ npm run dev
 
 ```
 
-## Step 2
 
 ```bash
-# make cartdirectories 
+# make other directories 
 mkdir routes
 mkdir middlewares
 mkdir controllers
@@ -78,7 +77,7 @@ mkdir classes
 mkdir models
 mkdir views
 
-# creo models data
+# create models data
  cd models
  ni examples.js
 
@@ -86,6 +85,10 @@ mkdir views
 cd controllers
 ni exampleController.js
 ```
+## Step 2 - Controller and Routing
+
+- Controller
+
 ```javascript
 // import model  in controller
 const examples = require("../models/examples.js"); 
@@ -164,6 +167,7 @@ function destroy(req, res) {
 module.exports = { index, show, store, update, destroy };
 
 ```
+- Routes
 ```bash
  # creo first example route
  cd routes
@@ -213,7 +217,8 @@ router.delete("/:id", destroy);
 
 //esport router
 module.exports = router;
-
+```
+```javascript
 // in server.js
 
 //Import router
@@ -228,7 +233,7 @@ app.use("/examples", examplesRouter);
 
 ```
 
-## Step 3
+## Step 3 - Other Middlewares
 
 ```bash
  # create other middlewares at least error middleware
@@ -273,7 +278,7 @@ app.use(notFound);
 
 ```
 
-## Step 4 - optional
+## Step 4 - custom error 
 
 ```bash
  # create custom error class extending Error class
