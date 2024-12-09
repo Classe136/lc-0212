@@ -75,7 +75,7 @@ mkdir middlewares
 mkdir controllers
 mkdir classes
 mkdir models
-mkdir views
+
 
 # create models data
  cd models
