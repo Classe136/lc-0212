@@ -22,7 +22,7 @@ rendi la pagina responsive, in modo che su mobile e tablet le foto si dispongano
 
 //api url
 //const baseUrl = "https://jsonplaceholder.typicode.com/";
-const baseUrl = "http://localhost:3000/";
+const baseUrl = "http://localhost:3000/api/";
 
 // endpoint
 const resource = {
