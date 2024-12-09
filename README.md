@@ -222,6 +222,85 @@ module.exports = router;
 const examplesRouter = require("./routes/examples");
 
 // add router middelware to routes
-app.use("/exmples", examplesRouter);
+app.use("/examples", examplesRouter);
+
+//TEST WITH POSTMAN
+
+```
+
+## Step 3
+
+```bash
+ # create other middlewares at least error middleware
+ cd middleware
+ ni errorsHandler.js
+ ni notFound.js
+```
+
+```javascript
+// errors handler example
+
+function errorsHandler(err, req, res, next) {
+  console.error(err.stack.split("\n")[1]);
+  //console.log(err);
+  res.status(err.statusCode || 500);
+  res.json({
+    error: err.message,
+  });
+}
+
+module.exports = errorsHandler;
+
+
+// 404 not found example
+function notFound(req, res, next) {
+  res.status(404);
+  res.json({ error: "Not Found", message: "Risorsa non trovata" });
+}
+
+module.exports = notFound;
+
+// import in server.js
+const errorsHandler = require("./middlewares/errorsHandler");
+const notFound = require("./middlewares/notFound");
+
+// register middleware as last routes in server.js
+
+app.use(errorsHandler);
+
+app.use(notFound);
+
+```
+
+## Step 4 - optional
+
+```bash
+ # create custom error class extending Error class
+ cd classes
+ ni CustomError.js
+ 
+```
+
+```javascript
+// custom error class
+
+class CustomError extends Error {
+  constructor(message, statusCode) {
+    super(message);
+    this.statusCode = statusCode;
+    this.status = `${statusCode}`.startsWith("4") ? "fail" : "error";
+    this.isOperational = true;
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
+
+module.exports = CustomError;
+
+
+//import class where you need it (example in controller)
+const CustomError = require("../classes/CustomError");
+
+// use 
+throw new CustomError("La pizza non esiste", 404);
 
 ```
