@@ -9,7 +9,7 @@ const CustomError = require("../classes/CustomError");
  * @returns {object} - response object with total count and array of filtered or all pizzas
  */
 function index(req, res) {
-  pippo.get();
+  // pippo.get();
   const itemName = req.query.name;
   const itemIngredient = req.query.ingredient;
   //console.log(itemName);

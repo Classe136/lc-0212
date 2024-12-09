@@ -28,10 +28,10 @@ app.use(express.json());
 
 //rotte web
 //app.get("/", homeController.index);
-app.get("/", (req, res) => {
-  //throw new Error("BROKEN");
-  res.send("Home page");
-});
+// app.get("/", (req, res) => {
+//   //throw new Error("BROKEN");
+//   res.send("Home page");
+// });
 
 // rotte api con middlewares
 app.use("/pizzas", pizzasRouter);

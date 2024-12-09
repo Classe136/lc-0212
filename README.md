@@ -245,7 +245,7 @@ app.use("/examples", examplesRouter);
 ```javascript
 // errors handler example
 
-function errorsHandler(err, req, res, next) {
+function errorsHandler(err, req, res, next) { 
   console.error(err.stack.split("\n")[1]);
   //console.log(err);
   res.status(err.statusCode || 500);
