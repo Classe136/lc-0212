@@ -259,7 +259,8 @@ function notFound(req, res, next) {
 }
 
 module.exports = notFound;
-
+```
+```javascript
 // import in server.js
 const errorsHandler = require("./middlewares/errorsHandler");
 const notFound = require("./middlewares/notFound");
@@ -295,12 +296,12 @@ class CustomError extends Error {
 }
 
 module.exports = CustomError;
-
-
+```
+```javascript
 //import class where you need it (example in controller)
 const CustomError = require("../classes/CustomError");
 
 // use 
-throw new CustomError("La pizza non esiste", 404);
+throw new CustomError("Questo item non esiste", 404);
 
 ```
